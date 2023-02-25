@@ -44,6 +44,12 @@ echo -e "${GREEN}Spotify Redirect URI:${NONE}"
 read redirectURI
 export SPOTIPY_REDIRECT_URI=$redirectURI
 
+export SPOTIFY_TOKEN_PATH="$(pwd)/.cache"
+
+read username
+export SPOTIFY_USERNAME=$username
+sudo python3 serviceController.py
+
 echo -e "${GREEN}You will be redirected to a page in your browser. Copy the URL and enter it into the terminal.${NONE}"
 sleep 2
 
@@ -56,6 +62,7 @@ python3 generateToken.py
 echo
 echo -e "${GREEN}Your Spotipy Token Has Been Created Under The Current Directory.${NONE}"
 echo -e "$(pwd)/.cache"
+export 
 
 echo
 echo -e "${GREEN}Installing the RGB Matrix Software.${NONE}"
@@ -67,10 +74,7 @@ echo -e "${GREEN}Installed the RGB Matrix Software.${NONE}"
 
 echo
 echo -e "${GREEN}Configure the RGB Matrix Software.${NONE}"
-cd ../config
-filename='matrixOptions.ini'
-if [ -f $filename ]; then
-	rm matrixOptions.ini
-fi
-touch $filename
+sudo bash configureMatrix.sh
+echo -e "${GREEN}Configured the RGB Matrix Software.${NONE}"
 
+python3 serviceController.py
